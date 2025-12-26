@@ -10,33 +10,36 @@ downwards. Similar behavior will occur for horizontal resize.
 
 ## Installation
 
-Clone this repo add the load path to Emacs init fie.
+### Vanilla Emacs
 
-### For newcomers
-
-I'm doing this because I remember me, when I was just starting to use Emacs ;)
-
-1. First you have to clone this repo in your local machine because it is not in
-   MELPA or any other package archive.
+1. Clone this repo.
 1. Add load path to your init file `(add-to-list 'load-path
    "/path/to/cloned/repository/softresize")`.
-1. Next, add the code in Optional configuration to your init file.
-
-### If Doom Emacs
-
-If you are using doom Emacs, you can paste this code to package.el file.
+1. Add bindings to your init file.
 
 ``` emacs-lisp
-(package! softresize
- :recipe (:host github :repo "quunnb/softresize"))
+;; Resize windows with Meta-Shift-<h|j|k|l>
+(require 'softresize)
+(global-set-key (kbd "M-K") (lambda () (interactive) (softresize-enlarge-window 8)))
+(global-set-key (kbd "M-J") (lambda () (interactive) (softresize-reduce-window 8)))
+(global-set-key (kbd "M-L") (lambda () (interactive) (softresize-enlarge-window-horizontally 8)))
+(global-set-key (kbd "M-H") (lambda () (interactive) (softresize-reduce-window-horizontally 8)))
 ```
 
-And then paste the code in Configuration in your config.el file ☺.
+### DOOM Emacs
 
-## Configuration
+package.el
 
-``` emacs-lisp
-;; Resize windows with Meta+Shift+(hjkl)
+```emacs-lisp
+(package! softresize
+ :recipe (:host github
+          :repo "quunnb/softresize"))
+```
+
+config.el
+
+```emacs-lisp
+;; Resize windows with Meta-Shift-<h|j|k|l>
 (use-package softresize
   :ensure t
   :bind (("M-H" . (lambda () (interactive) (softresize-reduce-window-horizontally 8)))
@@ -45,7 +48,7 @@ And then paste the code in Configuration in your config.el file ☺.
          ("M-L" . (lambda () (interactive) (softresize-enlarge-window-horizontally 8)))))
 ```
 
-Change the keybindings and delta as you please.
+Adjust the keybindings and delta to your liking.
 
 ## Demonstration
 
