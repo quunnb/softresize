@@ -37,11 +37,12 @@ And then paste the code in Configuration in your config.el file ☺.
 
 ``` emacs-lisp
 ;; Resize windows with Meta+Shift+(hjkl)
-(require 'softresize)
-(global-set-key (kbd "M-K") (lambda () (interactive) (softresize-enlarge-window 8)))
-(global-set-key (kbd "M-J") (lambda () (interactive) (softresize-reduce-window 8)))
-(global-set-key (kbd "M-L") (lambda () (interactive) (softresize-enlarge-window-horizontally 8)))
-(global-set-key (kbd "M-H") (lambda () (interactive) (softresize-reduce-window-horizontally 8)))
+(use-package softresize
+  :ensure t
+  :bind (("M-H" . (lambda () (interactive) (softresize-reduce-window-horizontally 8)))
+         ("M-J" . (lambda () (interactive) (softresize-reduce-window 8)))
+         ("M-K" . (lambda () (interactive) (softresize-enlarge-window 8)))
+         ("M-L" . (lambda () (interactive) (softresize-enlarge-window-horizontally 8)))))
 ```
 
 Change the keybindings and delta as you please.
